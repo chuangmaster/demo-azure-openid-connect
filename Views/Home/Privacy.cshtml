@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@{
+    ViewData["Title"] = "Privacy Policy";
+
+    var email = User.Identity?.Name;
+    var displayName = User.FindFirst("name")?.Value;
+    var objectId = User.FindFirst(Microsoft.Identity.Web.ClaimConstants.ObjectId)?.Value;
+    var tenantId = User.FindFirst(Microsoft.Identity.Web.ClaimConstants.TenantId)?.Value;
+}
+<h1>@ViewData["Title"]</h1>
+
+<h2>Use User.Identity get data</h2>
+<ul>
+    <li>Email: @email</li>
+    <li>DisplayName: @displayName</li>
+    <li>ObjectId: @objectId</li>
+    <li>TenantId: @tenantId</li>
+</ul>
+<h2>Claims</h2>
+<dl>
+    @foreach(var claim in User.Claims){
+     <dd>
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+     </dd>   
+    }
+</dl>
+<h2>Properties</h2>
+<dl>
+    @{
+        var items = (await Context.AuthenticateAsync()).Properties?.Items;
+    }
+    @if (items != null) foreach (var prop in items)
+    {
+        <dt>@prop.Key</dt>
+        <dd>@prop.Value</dd>
+    }
+</dl>

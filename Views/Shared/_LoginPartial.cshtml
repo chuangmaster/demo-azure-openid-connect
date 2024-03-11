@@ -1,0 +1,19 @@
+<span class="navbar-text">
+  Hi @User.Identity?.Name! @if (User.Identity?.IsAuthenticated == true) {
+  <a
+    class="btn btn-outline-secondary"
+    asp-area="MicrosoftIdentity"
+    asp-action="SignOut"
+    asp-controller="Account">
+    Sign out
+  </a>
+  }else{
+  <a
+    class="btn btn-outline-secondary"
+    asp-area="MicrosoftIdentity"
+    asp-action="SignIn"
+    asp-asp-controller="Account">
+    Sign In
+  </a>
+  }
+</span>
