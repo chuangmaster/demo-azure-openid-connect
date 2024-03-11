@@ -4,6 +4,7 @@ using demo_azure_openid_connect.Models;
 using Microsoft.Identity.Web;
 using IdentityModel.Client;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace demo_azure_openid_connect.Controllers;
 
@@ -21,7 +22,7 @@ public class HomeController : Controller
         this.httpClientFactory = httpClientFactory;
 
     }
-
+    [AllowAnonymous]
     public IActionResult Index()
     {
         return View();
